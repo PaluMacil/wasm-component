@@ -1,0 +1,27 @@
+  version: '3'
+
+  tasks:
+    build-server:
+      cmds:
+        - go build -o dist/
+    certman:
+      cmds:
+        - sudo -u {{.OWNER}} mkdir /opt/certman
+        - sudo -u {{.OWNER}} mkdir /var/opt/certman
+        - go build -o /opt/certman/certman ./cmd/certman/
+      vars:
+        OWNER:
+          sh: id -u -n
+    assets:
+      cmds:
+        - go build -o dist/assets ./cmd/assets
+        - . dist/assets {{.CLI_ARGS}}
+    dirs:
+      cmds:
+        - |
+          if [ "$(id -u)" != "0" ]; then
+            echo "This script must be run as root" 1>&2
+            exit 1
+          fi
+          install -d -m 0700 -o $SUDO_USER -g $SUDO_USER /opt/certman
+          install -d -m 0700 -o $SUDO_USER -g $SUDO_USER /var/opt/certman
