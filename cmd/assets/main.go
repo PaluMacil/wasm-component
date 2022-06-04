@@ -1,4 +1,4 @@
-package assets
+package main
 
 import (
 	"fmt"
@@ -9,7 +9,7 @@ import (
 )
 
 func list() {
-	fs.WalkDir(web.Templates, "/", func(path string, d fs.DirEntry, err error) error {
+	fs.WalkDir(web.Templates, ".", func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -20,7 +20,7 @@ func list() {
 
 func main() {
 	args := os.Args
-	if len(args) > 2 {
+	if len(args) < 2 {
 		log.Fatalln("no subcommand given")
 	}
 	subCommand := args[1]

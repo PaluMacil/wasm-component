@@ -4,6 +4,9 @@
     build-server:
       cmds:
         - go build -o dist/
+    build-client:
+      cmds:
+        - GOOS=js GOARCH=wasm go build -o dist/client.wasm ./cmd/client
     certman:
       cmds:
         - sudo -u {{.OWNER}} mkdir /opt/certman
@@ -15,7 +18,7 @@
     assets:
       cmds:
         - go build -o dist/assets ./cmd/assets
-        - . dist/assets {{.CLI_ARGS}}
+        - ./dist/assets {{.CLI_ARGS}}
     dirs:
       cmds:
         - |

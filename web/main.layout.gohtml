@@ -1,0 +1,24 @@
+{{define "layout"}}
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>{{template "title" .}} - WASM Component Demo</title>
+
+    <meta name="keywords" content="WASM Go components">
+    <meta name="description" content="demonstrating Go WASM components using Go templates"/>
+    <meta name="author" content="Dan Wolf">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="static/pico.css">
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+
+<body>
+    {{template "page" .}}
+    <script src="static/main.js"></script>
+</body>
+</html>
+{{end}}
