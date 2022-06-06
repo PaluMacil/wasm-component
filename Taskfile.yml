@@ -1,9 +1,13 @@
   version: '3'
 
   tasks:
+    build:
+      cmds:
+        - task: build-client
+        - task: build-server
     build-server:
       cmds:
-        - go build -o dist/
+        - go build -o dist/server ./cmd/server
     build-client:
       cmds:
         - GOOS=js GOARCH=wasm go build -o dist/client.wasm ./cmd/client

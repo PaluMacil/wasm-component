@@ -13,6 +13,9 @@ func list() {
 		if err != nil {
 			log.Fatal(err)
 		}
+		if d.IsDir() {
+			return nil
+		}
 		fmt.Println(path)
 		return nil
 	})

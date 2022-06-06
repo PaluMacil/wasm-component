@@ -1,0 +1,5 @@
+package wc
+
+func FindPages() {
+
+}

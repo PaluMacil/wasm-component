@@ -4,6 +4,8 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/">
 
     <title>{{template "title" .}} - WASM Component Demo</title>
 
@@ -11,7 +13,10 @@
     <meta name="description" content="demonstrating Go WASM components using Go templates"/>
     <meta name="author" content="Dan Wolf">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <!-- TODO:
+    <link rel="shortcut icon" href="static/favicon.ico">
+    <link rel="canonical" href="https://example.com/page">
+    !-->
     <link rel="stylesheet" href="static/pico.css">
     <link rel="stylesheet" href="static/styles.css">
 </head>
@@ -19,6 +24,13 @@
 <body>
     {{template "page" .}}
     <script src="static/main.js"></script>
+    <script src="static/wasm_exec.js"></script>
+    <script>
+        const go = new Go();
+        WebAssembly.instantiateStreaming(fetch("static/client.wasm"), go.importObject).then((result) => {
+            go.run(result.instance);
+        });
+    </script>
 </body>
 </html>
 {{end}}
