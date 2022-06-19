@@ -2,14 +2,14 @@ package main
 
 import (
 	"fmt"
-	"github.com/PaluMacil/wasm-component/web"
+	"github.com/PaluMacil/wasm-component/example"
 	"io/fs"
 	"log"
 	"os"
 )
 
 func list() {
-	fs.WalkDir(web.Templates, ".", func(path string, d fs.DirEntry, err error) error {
+	fs.WalkDir(example.Templates, ".", func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
 			log.Fatal(err)
 		}
