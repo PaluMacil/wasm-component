@@ -13,9 +13,10 @@
         - GOOS=js GOARCH=wasm go build -o dist/client.wasm ./cmd/client
     certman:
       cmds:
-        - sudo -u {{.OWNER}} mkdir /opt/certman
-        - sudo -u {{.OWNER}} mkdir /var/opt/certman
+        - sudo -u {{.OWNER}} mkdir -p /opt/certman
+        - sudo -u {{.OWNER}} mkdir -p /var/opt/certman
         - go build -o /opt/certman/certman ./cmd/certman/
+        - /opt/certman/certman {{.CLI_ARGS}}
       vars:
         OWNER:
           sh: id -u -n

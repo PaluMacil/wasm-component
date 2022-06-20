@@ -87,6 +87,17 @@ user would be able to add base href (for instance `/` or `/api`) and the upstrea
 interface could also provide additional features such as stripping or transforming parts of the url 
 before sending the data upstream, or there could be convenience utilities for serving static files.
 
+Usage (in this example, for `workout.dev.rhyvu.com`)
+ - gen a CA `task certman -- init`
+ - create cert `task certman -- workout workout.dev.rhyvu.com`
+ - convert pem to pk12 `openssl pkcs12 -export -out workout.pkcs12 -in workout.crt -inkey workout.key`
+ - (might not be correct command as it doesn't seem to set as trusted or as an authority, but you can manually add in Settings > Privacy and Security > Manage certificates > Authorities) add ca to Chrome `pk12util -d sql:$HOME/.pki/nssdb -i /var/opt/certman/workout.pkcs12`
+ - list personal certs `certutil -d sql:$HOME/.pki/nssdb -L`
+ - add `/etc/hosts` entries
+   - `127.0.0.1 dev.rhyvu.com`
+   - `127.0.0.1 accounts.dev.rhyvu.com`
+   - `127.0.0.1 workout.dev.rhyvu.com`
+
 ## License and Purpose
 
 This project is licensed permissively with a standard [MIT license](LICENSE.txt) which allows both commercial and 
